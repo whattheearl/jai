@@ -1,0 +1,27 @@
+services:
+    open-webui:
+        image: ghcr.io/open-webui/open-webui:main
+        ports:
+            - 8080:8080
+        volumes:
+            - open-webui:/app/backend/data
+        environment:
+            - OLLAMA_BASE_URL=http://ollama:11434 
+
+    ollama:
+        image: ollama/ollama
+        # need moar JUICE
+        # image: ollama/ollama:roc
+        # devices:
+        #     - /dev/kfd
+        #     - /dev/dri
+        environment:
+            - OLLAMA_MODELS=/root/.ollama/models
+        ports:
+            - 11434:11434
+        volumes:
+            - ollama:/root/.ollama/models
+
+volumes:
+    open-webui:
+    ollama:
